@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コピーします</title>
+</head>
+<body>
+    <h1 style="font-size: 30px;">自己入力ののコピー</h1>
+    <textarea style="font-size: 20px;position: relative;width: 100%;height: 30px;" value="" class="copy_text"></textarea>
+    <button style="font-size: 15px;position: relative;width: 100%;height: 30px;display: grid;" onclick="
+        document.querySelector('.copy_text').select();
+        document.execCommand('copy');
+        document.querySelector('.copy_btn').innerHTML = '✔コピーしました。';
+        setTimeout(function(){
+            document.querySelector('.copy_btn').innerHTML = 'コピー';
+        },3000);
+    " class="copy_btn">コピー</button>
+</body>
+</html>
