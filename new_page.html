@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htmlを作成します</title>
+    <script>
+        function new_(){
+            var go_url = prompt("移動先のURLを入力してください。")
+            document.body.innerText = `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"></head><body onload="setTimeout(function(){location.replace('${go_url}');},0);">ページが移動しませんか?<a href="${go_url}">ココ</a>をクリックしてください</body></html>`;
+        }
+    </script>
+</head>
+<body onload="new_();">
+    
+</body>
+</html>
