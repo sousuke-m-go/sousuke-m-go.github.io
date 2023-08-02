@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja" xml:lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>YouTube動画の再生終了後にリダイレクトで別のページに自動的に移動させる仕組み（IFrameプレーヤーAPI（JavaScript））</title>
+	
+	<script type="text/javascript">
+		//**************************************************************************
+			
+			//★ユーザー用の設定項目
+			
+			//★動画プレーヤーの横幅と縦幅を設定する（ピクセル数）。
+							
+							//横幅
+							var videoWidth = 530;
+							
+							//縦幅
+							var videoHeight = 298;
+							
+			//★表示させるYouTube動画の「動画ID」を設定する。
+							var youtubeVideoID = "uin_Dutg3FU";
+							
+			//★表示させるYouTube動画の「動画ID」を設定する。2
+		
+			//★リダイレクト先のページを新しいウィンドウ（新しいタブ）で開くか、
+			//  同じページ内で開くかを設定する
+							//新しいウィンドウ（新しいタブ）で開く「1」 / 同じページ内で開く「0」
+							var redirectTargetBlank = 0;
+			
+		//**************************************************************************
+	</script>
+	
+</head>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="iframe_player_api"></div>
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('iframe_player_api', {
+          height: '360',
+          width: '640',
+          videoId: 'uin_Dutg3FU',
+          
+          
+						playerVars: {
+								//左の値は「パラメータの名前」。
+								//右の値は「パラメータの値」。
+								'modestbranding': 1,
+								'autohide': 1,
+								'controls': 1,
+								'showinfo': 0,
+								'rel': 0
+								
+						},
+          
+          
+          
+          
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          },
+          class: 'ytvideo_'
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+		function onPlayerStateChange(event){
+            var yt_id_list = {
+                _1: "uin_Dutg3FU",
+                _2: "-Dkxq9uSNQ4"
+            }
+            if(document.querySelector("#iframe_player_api").videoId == yt_id_list._1){
+                document.querySelector("#iframe_player_api").videoId = yt_id_list._2;
+            }else{
+                document.querySelector("#iframe_player_api").videoId = yt_id_list._1;
+            }
+		}
+    </script>
+  </body>
+</html>
